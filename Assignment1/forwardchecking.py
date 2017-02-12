@@ -1,6 +1,11 @@
+# This guy uses a lot of stuff from backtracking.py
+
 from makePuzzles import *
 from backtracking import *
 import time
+import random
+
+countNodes = 0
 
 
 
@@ -9,7 +14,7 @@ def markBulbStuff(puz,i,j):
     cols = len(puz[0])
     # mark up
     k=i-1
-    while k>0 and isinstance( puz[k][j], int ):
+    while k>=0 and isinstance( puz[k][j], int ):
         puz[k][j]=puz[k][j]%2
         k-=1
 
@@ -21,7 +26,7 @@ def markBulbStuff(puz,i,j):
 
     # mark left
     k=j-1
-    while k>0 and isinstance( puz[i][k], int ):
+    while k>=0 and isinstance( puz[i][k], int ):
         puz[i][k]=puz[i][k]%2
         k-=1
 
@@ -35,7 +40,7 @@ def checkEdgeCorner(puz,i,j):
     # not an edge or corner status = 0
     # an edge, status = 1
     # a corner status = 2
-    status = 4
+    status = 0
     if(i==0 or i==len(puz)-1):
         status+=1
     if(j==0 or j==len(puz[0])-1):
@@ -127,8 +132,8 @@ def checkPuzzle(puz,notassigned):
 
                 numRequiredBulbs = wallVal - adjBulbs - status
 
-                if adjPotentialBulbs == numRequiredBulbs:
-                    markWallStuff(puz,i,j)
+                #if adjPotentialBulbs == numRequiredBulbs:
+                #    markWallStuff(puz,i,j)
 
     # Figure out the return value and reset puzzle back to normal
     ret = True
@@ -142,17 +147,21 @@ def checkPuzzle(puz,notassigned):
     return ret
 
 def forwardchecking(puz, domain, notassigned):
+    global countNodes
+    countNodes+=1
+    if countNodes%10000 == 0:
+        print(countNodes,end='\r')
     if complete(puz):
         return puz
     if len(notassigned)== 0 or not checkPuzzle(puz,notassigned):
         return "back"
-    val = notassigned.pop()
+    val = getFromHeuristic(puz,notassigned,'constrained')
     i = int(val/len(puz))
     j = int(val%len(puz))
 
     for value in domain:
         puz[i][j] = value
-        if ((value != "_" and legal(puz)) or value == "_"):
+        if ((value != "_" and legal(puz,i,j)) or value == "_"):
             result = forwardchecking(puz, domain, notassigned)
             if result != "back":
                 return result
@@ -190,6 +199,8 @@ def main( argv = None ):
     printPuzzle(solve(puzzle))
     end = time.time()
     print(end-start)
+    global countNodes
+    print(countNodes)
 
 
 
