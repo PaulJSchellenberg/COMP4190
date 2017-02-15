@@ -186,10 +186,10 @@ def makePuzzles( count, width, height, bulbs, walls, solution):
         if ( walls == -1 ):
             walls = int(width * height * 0.3)
         puzzle.random(bulbs, walls)
-        print('# Start of puzzle')
-        print(height,width)
-        print(puzzle.createPuzzleString(puzzle.puzzle))
-        print('# End of puzzle')
+        #print('# Start of puzzle')
+        #print(height,width)
+        #print(puzzle.createPuzzleString(puzzle.puzzle))
+        #print('# End of puzzle')
         if ( solution ):
             print('#  Solution')
             print(puzzle.createSolutionString(puzzle.puzzle))

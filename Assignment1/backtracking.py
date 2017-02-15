@@ -1,5 +1,5 @@
 from makePuzzles import *
-import copy
+import time
 
 wallNums = ['0','1','2','3','4']
 
@@ -48,7 +48,7 @@ def findConstraining(puz,notassigned):
 	cols = len(puz[0])
 	winners = []
 	maxCount = 0
-	
+
 	# marks the rays
 	raytraceAll(puz)
 	for val in notassigned:
@@ -65,8 +65,10 @@ def findConstraining(puz,notassigned):
 	deRaytrace(puz)
 	
 	#print(winners)
-			
-	return winners[random.randint(0,len(winners)-1)]
+	if len(winners) > 0:
+		return winners[random.randint(0,len(winners)-1)]
+	else:
+		return None
 
 def findConstrained(puz,notassigned):
 	rows = len(puz)
@@ -271,7 +273,7 @@ def solve(puz):
 	notassigned = getBlanks(puz)
 	return backtrack(puz, domain, notassigned)
 
-countNodes=0
+countNodes = 0
 def backtrack (puz, domain, notassigned):
 	if complete(puz):
 		return puz
@@ -281,8 +283,11 @@ def backtrack (puz, domain, notassigned):
 	if countNodes%10000 == 0:
 		print(countNodes,end='\r')
 
+	if countNodes > 100000:
+		return False
+		
 	if len(notassigned)== 0:
-		return "back"
+		return False
 		
 	val = getFromHeuristic(puz,notassigned,'constraining')
 	i = val[0]
@@ -292,11 +297,11 @@ def backtrack (puz, domain, notassigned):
 		puz[i][j] = value
 		if (value != "_" and legal(puz,i,j)) or value == "_":
 			result = backtrack(puz, domain, notassigned)
-			if result != "back":
+			if result != False:
 				return result
 
 	notassigned.append(val)
-	return "back"
+	return False
 
 def clearSolution(puzzle):
 	rows = len(puzzle)
@@ -309,6 +314,7 @@ def clearSolution(puzzle):
 debug = "none"
 def main( argv = None ):
 	global debug
+	global countNodes
 	
 	if (argv == None):
 		argv = sys.argv[1:]
@@ -324,19 +330,28 @@ def main( argv = None ):
 	
 	
 	args = parser.parse_args( argv )
+	debug = args.debug
 	if (args.verbose > 0 ):
 		print('AkariMaker {0}x{1} bulbs {2} walls {3}'.format(args.width, args.height, args.bulbs, args.walls ))
 
-	puzzle = makePuzzles(args.count, args.width, args.height, args.bulbs, args.walls, args.solution )
+	sizes = (6, 8, 10, 12, 14, 16, 18)
+	for size in sizes:
+		totalNodes = 0
+		totalTime = 0
+		count = 0
+		for i in range(3):
+			puzzle = makePuzzles(args.count, size, size, args.bulbs, args.walls, args.solution )
+			clearSolution(puzzle)
 
-	clearSolution(puzzle)
-
-	debug = args.debug
-	print()
-
-	printPuzzle(solve(puzzle))
-
-	print(countNodes)
+			startTime = time.time()
+			countNodes = 0
+			solution = solve(puzzle)
+			if solution != False:
+				#printPuzzle(solution)
+				totalTime += time.time() - startTime
+				totalNodes += countNodes
+				count += 1
+		print("Size %dx%d\nNodes visited: %d\nTime to complete: %f\n" % (size, size, totalNodes // count, totalTime / count))
 
 if __name__ == '__main__':
 	main()
