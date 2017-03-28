@@ -1,0 +1,155 @@
+** Each result is the average of 3 trials.
+
+<-- Result Summarization is on the bottom -->
+
+Table #1
+Testing Algorithm and Heuritic combinations for different sized Playing fields
+Runtimes were limited to visit a total of 5000000 Nodes.
+
+Each algorithm-heuristic combination has two rows.
+One row for runtime, one row for nodes visited
+
++--------------+------------+--------------+----------------+----------------+
+|              | 6x6        | 8x8          | 10x10          | 12x12          |
++--------------+------------+--------------+----------------+----------------+
+| Backtrack    | 0.03642s   | 1.3856 s     | 35.075s        | 37.161s        |
+| Random       |            |              |                |                |
+| Avg Time     |            |              |                |                |
++--------------+------------+--------------+----------------+----------------+
+| BackTrack    | 4431 Nodes | 183526 Nodes | 5000000 Nodes  | 5000000 Nodes  |
+| Random       |            |              |                |                |
+| Avg Nodes    |            |              | TimeOut!       | TimeOut!       |
+|              |            |              | Did Not Finish | Did Not Finish |
++--------------+------------+--------------+----------------+----------------+
+| Backtrack    | 0.002486s  | 0.00400      | 0.01417s       | 0.0203         |
+| Constrained  |            |              |                |                |
+| Avg Time     |            |              |                |                |
++--------------+------------+--------------+----------------+----------------+
+| Backtrack    | 42 Nodes   | 35 Nodes     | 113 Nodes      | 122 Nodes      |
+| Constrained  |            |              |                |                |
+| Avg Nodes    |            |              |                |                |
++--------------+------------+--------------+----------------+----------------+
+| Backtrack    | 0.251s     | 9.973s       | 201.89s        | 300.30s        |
+| Constraining |            |              |                |                |
+| Avg Time     |            |              |                |                |
++--------------+------------+--------------+----------------+----------------+
+| Backtrack    | 9258 Nodes | 301206 Nodes | 5000000 Nodes  | 5000000 Nodes  |
+| Constraining |            |              |                |                |
+| Avg Nodes    |            |              | TimeOut!       | TimeOut!       |
+|              |            |              | Did Not Finish | Did Not Finish |
++--------------+------------+--------------+----------------+----------------+
+| ForwardCheck | 0.169s     | 1.85s        | 675.2s         | 998.31s        |
+| Random       |            |              |                |                |
+| Avg Time     |            |              |                |                |
++--------------+------------+--------------+----------------+----------------+
+| ForwardCheck | 3607 Nodes | 62739 Nodes  | 5000000 Nodes  | 5000000 Nodes  |
+| Random       |            |              |                |                |
+| Avg Nodes    |            |              | TimeOut!       | TimeOut!       |
+|              |            |              | Did Not Finish | Did Not Finish |
++--------------+------------+--------------+----------------+----------------+
+| ForwardCheck | 0.00243s   | 0.00770s     | 0.01972s       | 0.031349s      |
+| Constrained  |            |              |                |                |
+| Avg Time     |            |              |                |                |
++--------------+------------+--------------+----------------+----------------+
+| ForwardCheck | 16 Nodes   | 29 Nodes     | 65 Nodes       | 61 Nodes       |
+| Constrained  |            |              |                |                |
+| Avg Nodes    |            |              |                |                |
++--------------+------------+--------------+----------------+----------------+
+| ForwardCheck | 0.3047s    | 23.2316s     | 879.872s       | 1237.31s       |
+| Constraining |            |              |                |                |
+| Avg Time     |            |              |                |                |
++--------------+------------+--------------+----------------+----------------+
+| ForwardCheck | 4247 Nodes | 205828 Nodes | 5000000 Nodes  | 5000000 Nodes  |
+| Constraining |            |              |                |                |
+| Avg Nodes    |            |              | TimeOut!       | TimeOut!       |
+|              |            |              | Did Not Finish | Did Not Finish |
++--------------+------------+--------------+----------------+----------------+
+
+Table #2
+Testing Algorithm and Heuritic combinations for different amounts of walls
+in a 12x12 playing field
+
+Trials were limited to 5000000 Nodes again
+
+Each algorithm-heuristic combination has two rows.
+One row for runtime, one row for nodes visited
+
++--------------+----------------+-----------------+----------------+
+|              | 12 Walls       | 24 Walls        | 48 Walls       |
++--------------+----------------+-----------------+----------------+
+| Backtrack    | 36.107s        | 35.945s         | 41.359s        |
+| Random       |                |                 |                |
+| Avg Time     |                |                 |                |
++--------------+----------------+-----------------+----------------+
+| Backtrack    | 5000000 Nodes  | 5000000 Nodes   | 5000000 Nodes  |
+| Random       |                |                 |                |
+| Avg Nodes    | TimeOut!       | TimeOut!        | TimeOut!       |
+|              | Did Not Finish | Did Not Finish  | Did Not Finish |
++--------------+----------------+-----------------+----------------+
+| Backtrack    | 389.377s       | 224.45s         | 0.0619s        |
+| Constrained  |                |                 |                |
+| Avg Time     |                |                 |                |
++--------------+----------------+-----------------+----------------+
+| Backtrack    | 5000000 Nodes  | 2724132 Nodes   | 647 Nodes      |
+| Constrained  |                | Only Succeeded  |                |
+| Avg Nodes    | TimeOut!       | 2/3 times       |                |
+|              | Did Not Finish | Timed out 1/3   |                |
++--------------+----------------+-----------------+----------------+
+| Backtrack    | 401.65s        | 372.46s         | 279.62s        |
+| Constraining |                |                 |                |
+| Avg Time     |                |                 |                |
++--------------+----------------+-----------------+----------------+
+| Backtrack    | 5000000 Nodes  | 5000000         | 5000000        |
+| Constraining |                |                 |                |
+| Avg Nodes    | TimeOut!       | TimeOut!        | TimeOut!       |
+|              | Did Not Finish | Did Not Finish  | Did Not Finish |
++--------------+----------------+-----------------+----------------+
+| ForwardCheck | 833.403s       | 915.788s        | 1018.00s       |
+| Random       |                |                 |                |
+| Avg Time     |                |                 |                |
++--------------+----------------+-----------------+----------------+
+| ForwardCheck | 5000000 Nodes  | 5000000 Nodes   | 5000000 Nodes  |
+| Random       |                |                 |                |
+| Avg Node     | TimeOut!       | TimeOut!        | TimeOut!       |
+|              | Did Not Finish | Did Not Finish  | Did Not Finish |
++--------------+----------------+-----------------+----------------+
+| ForwardCheck | 1114.285s      | 444.791s        | 0.033299s      |
+| Constrained  |                |                 |                |
+| Avg Time     |                |                 |                |
++--------------+----------------+-----------------+----------------+
+| ForwardCheck | 5000000 Nodes  | 1708417 Nodes   | 66 Nodes       |
+| Constrained  |                |                 |                |
+| Avg Node     | TimeOut!       |                 |                |
+|              | Did Not Finish |                 |                |
++--------------+----------------+-----------------+----------------+
+| ForwardCheck | 1314.49s       | 1371.29s        | 1361.63s       |
+| Constraining |                |                 |                |
+| Avg Time     |                |                 |                |
++--------------+----------------+-----------------+----------------+
+| ForwardCheck | 5000000 Nodes  | 5000000 Nodes   | 5000000 Nodes  |
+| Constraining |                |                 |                |
+| Avg Node     | TimeOut!       | TimeOut!        | TimeOut!       |
+|              | Did Not Finish | Did Not Finish  | Did Not Finish |
++--------------+----------------+-----------------+----------------+
+
+
+<-- Result Summarization -->
+When both backtracking and forwardchecking succeeded in their trials,
+Backtracking consistantly ran with a shorter runtime. However, forwardchecking
+always visited less nodes than backtracking.
+
+For example, in the first table, Forwardchecking with the constrained heuristic,
+on average visited 61 Nodes while backtracking visited 122 Nodes. This value is
+double that of forwardchecking.
+
+However, for the same trial, forwardchecking completed the trial in
+0.0313 seconds while backtracking completed the trial in 0.0203 seconds. The
+extra overhead checking that forwardchecking does improve algorithmic efficiency
+but does not improve the runtime. Perhaps with
+
+For all the trials that have completed, backtracking took 49.79% less time
+than forwardchecking. However, backtracking observed 62.39% more nodes than
+forwardchecking.
+
+In our opinion, we prefer backtracking. even though it checks more nodes,
+overall runtime is more important to us.
