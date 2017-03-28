@@ -27,6 +27,10 @@ class Domain:
 
         self.placeStartAndEnd()
 
+        for i in range(self.size):
+            for j in range(self.size):
+                self.fillPos((i,j),'#')
+
     def placeStartAndEnd(self):
         for i in range(self.size):
             for j in range(self.size):
@@ -57,9 +61,7 @@ class Domain:
 
         self.num=-1
         self.nums=[]
-        for i in range(self.size):
-            for j in range(self.size):
-                self.fillPos((i,j),'#')
+
 
     def fillPos(self,pos,char):
         stop = False
