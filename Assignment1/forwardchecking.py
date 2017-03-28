@@ -220,6 +220,5 @@ def main( argv = None ):
     print("Nodes visited: %d\n" % (countNodes))
 
 
-
 if __name__ == '__main__':
     main()
