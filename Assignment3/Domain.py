@@ -27,10 +27,6 @@ class Domain:
 
         self.placeStartAndEnd()
 
-        for i in range(self.size):
-            for j in range(self.size):
-                self.fillPos((i,j),'#')
-
     def placeStartAndEnd(self):
         for i in range(self.size):
             for j in range(self.size):
@@ -59,9 +55,11 @@ class Domain:
                 if self.grid[i][j] in self.nums:
                     self.grid[i][j]=' '
 
-        self.num=-1
+        """self.num=-1
         self.nums=[]
-
+        for i in range(self.size):
+            for j in range(self.size):
+                self.fillPos((i,j),'#')"""
 
     def fillPos(self,pos,char):
         stop = False
@@ -101,14 +99,14 @@ class Domain:
     def printDomain(self):
         border = self.size+2
         ret=''
-        for i in range(-1,self.size+1):
-            for j in range(-1,self.size+1):
+        for j in range(-1,self.size+1):
+            for i in range(-1,self.size+1):
                 if (i==-1 or i==self.size) and (j==-1 or j==self.size):
                     ret+='+'
                 elif i==-1 or i==self.size:
-                    ret+='-'
-                elif j==-1 or j==self.size:
                     ret+='|'
+                elif j==-1 or j==self.size:
+                    ret+='-'
                 else:
                     ret+=str(self.grid[i][j])
             ret+='\n'
