@@ -6,7 +6,7 @@ from Node import *
 import random
 from queue import PriorityQueue
 import math
-from RTT import *
+from RRT import *
 import copy
 import time
 
@@ -86,7 +86,7 @@ def main():
 		floorPlan.fillDomain(obNum)
 		#floorPlan.printDomain()
 
-		RTTMap = copy.deepcopy(floorPlan)
+		RRTMap = copy.deepcopy(floorPlan)
 
 		start = time.time()
 		tree = quadtree(floorPlan)
@@ -102,7 +102,9 @@ def main():
 		tree.printTree(floorPlan.grid)
 		print('Time for QuadTree: {0}\n'.format(end-start))
 
-		RTT(RTTMap)
+		RRTtime,RRTlength = RRT(RRTMap)
+		print('Time for RRT: {0}'.format(RRTtime))
+		print('Distance for RRT: {0}'.format(RRTlength))
 
 
 if __name__ == '__main__':
